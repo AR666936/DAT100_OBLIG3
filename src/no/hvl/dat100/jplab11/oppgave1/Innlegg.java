@@ -81,12 +81,11 @@ public abstract class Innlegg {
 	
 	public boolean erLik(Innlegg innlegg) {
 		
-		boolean likId = false;
 		if (this.id == innlegg.id) {
-			likId = true;	
+			return true;	
 		}
 		
-		return likId;
+		return false;
 
 	}
 	
