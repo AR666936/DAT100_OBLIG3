@@ -35,56 +35,58 @@ public class Blogg {
 	}
 	
 	public int finnInnlegg(Innlegg innlegg) {
-		int svar = 0;
-		for (int i = 0; i < innleggtabell.length; i++) {
-			if (innlegg.erLik(innleggtabell[i]) == true) {
+		int svar = -1;
+		for (int i = 0; i < nesteledig; i++) {
+			if (innlegg.erLik(innleggtabell[i])) {
 				svar = i;
-			} else {
-				svar = -1;
 			}
 		}
-		
 		return svar;
 	}
 
 	public boolean finnes(Innlegg innlegg) {
-		boolean svar = false;
-					
-		if (finnInnlegg(innlegg) <= 0) {
-			svar = true;
+		boolean finnes = false;
+		if (finnInnlegg(innlegg) >= 0) {
+			finnes = true;
 		}
 		
-		return svar;
+		return finnes;
 	}
 
 	public boolean ledigPlass() {
-		boolean svar = false;
+		boolean ledig = false;
 		if (nesteledig < innleggtabell.length) {
-			svar = true;
+			ledig = true;
 		}
 		
-		return svar;
+		return ledig;
 
 	}
 	
 	public boolean leggTil(Innlegg innlegg) {
-		boolean svar = false;
+		boolean lagtTil = false;
 		
-		if (ledigPlass() == true && finnes(innlegg) == false) {
+		if (ledigPlass() && finnes(innlegg) == false) {
 			innleggtabell[nesteledig] = innlegg;
 			nesteledig++;
-			svar = true;
+			lagtTil = true;
+			
 		}
 		
-		return svar;
+		return lagtTil;
 		
 	}
 	
 	public String toString() {
 		
-		String info = ("BILDE\n" + getId()+ "\n" + getBruker() + "\n" + getDato() + "\n" + getLikes() + "\n" + getTekst() + "\n" + getUrl() + "\n");
-		
-		return info;
+		StringBuilder resultat = new StringBuilder();
+	    resultat.append(getAntall()).append("\n");
+
+	    for (int i = 0; i < nesteledig; i++) {
+	        resultat.append(innleggtabell[i].toString());
+	    }
+
+	    return resultat.toString();
 	}
 
 	// valgfrie oppgaver nedenfor
@@ -109,5 +111,4 @@ public class Blogg {
 		throw new UnsupportedOperationException(TODO.method());
 
 	}
-}
 }
