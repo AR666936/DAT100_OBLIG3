@@ -45,35 +45,32 @@ public class Blogg {
 	}
 
 	public boolean finnes(Innlegg innlegg) {
-		boolean finnes = false;
 		if (finnInnlegg(innlegg) >= 0) {
-			finnes = true;
+			return true;
 		}
 		
-		return finnes;
+		return false;
 	}
 
 	public boolean ledigPlass() {
-		boolean ledig = false;
 		if (nesteledig < innleggtabell.length) {
-			ledig = true;
+			return true;
 		}
 		
-		return ledig;
+		return false;
 
 	}
 	
 	public boolean leggTil(Innlegg innlegg) {
-		boolean lagtTil = false;
 		
 		if (ledigPlass() && finnes(innlegg) == false) {
 			innleggtabell[nesteledig] = innlegg;
 			nesteledig++;
-			lagtTil = true;
+			return true;
 			
 		}
 		
-		return lagtTil;
+		return false;
 		
 	}
 	
